@@ -16,7 +16,7 @@ struct Download: ParsableCommand {
     }
     
     func run() throws {
-        if Folder.current.containsSubfolder(named: "Templates") {
+        if !Folder.current.containsSubfolder(named: "Templates") {
             try shellOut(to: .gitClone(url: repositoryUrl))
             return
         }

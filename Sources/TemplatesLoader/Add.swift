@@ -13,6 +13,14 @@ struct Add: ParsableCommand {
     func run() throws {
         try addFileTemplates()
         try addProjectTemplates()
+        do {
+            try addFileTemplates()
+            try addProjectTemplates()
+        } catch let error as LocationError where error.reason != .missing {
+            throw error
+        } catch {
+            // Ignore
+        }
     }
     
     private func addFileTemplates() throws {
